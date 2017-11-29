@@ -14,7 +14,18 @@ the third one, Reflection. Strong sunlight reflected from shiny objects is anoth
 
 the fourth one, Contrast. they collect all saturation percentile ratios to build this feature.
 
-the last one, Haze. Cloudy weather may come with haze. haze priors have been well studied in computer vision, the dark channel prior is effective.
+the last one, Haze. Cloudy weather may come with haze. haze priors have been well studied in computer vision, the dark channel prior is effective to form the haze feature.
+
+Traditional classifiers such as SVM cannot achieve good performance on our weather feature because they assume all components to present simultaneously in all images, which unfortunately may not be correct in many tasks. For example, in our setting, outdoor images do not always contain the sky region. So the learning strategy is to partition training images into disjoint clusters of homogeneous voters. Given a test image, voters closer to it are given more weights for correctly finding the weather label. The partitioned sets correspond to different weather cue patterns, such as “sky + shadow”, “sky + haze”.
+
+In the testing phase, given a weather feature x with existence vector e, we rely on training data whose existence vectors are similar to e. Following this idea, the classifier is based on weighted voting scheme. sign is the function outputting 1 for non-negative input. s is a similarity function. and h i hat is the trained homogeneous voter.
+
+The weather dataset contains 14 thousand labelled images. the label is either sunny or cloudy, half and half. the dataset has 3 sources.
+
+This work is the first attempt in dealing with weather labeling given single images, apparently, this problem is far from solved. we could add more useful weather cues in this framework. And this approach is limited in labeling two weather types, we could generalize to labeling more weather types. In addition, This approach rely on handcrafted features, may adopt some deep learning based approaches to improve it.
+
+
+
 
 
 
