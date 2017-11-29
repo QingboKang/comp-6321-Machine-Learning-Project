@@ -1,0 +1,24 @@
+this paper makes the first attempt to address the two-class weather classification problem from a single outdoor image.
+
+it's a easy task for human, but it's challenging for computer. naive schemes based on image brightness or color statistics are failed in this problem.
+
+the first contribution of this paper is propose various weather cues to form the weather feature. These everyday weather cues(sky, shadow, reflection, contrast, haze) are what human are still using for weather observing. It's a 621-D feature vector.
+
+since not all of these cues are necessarily present in a given outdoor image, so there is the existence vector, where each of the scalar score in [0, 1] indicates the confidence in the corresponding weather cue being present in the given image. since image contrast is present in both sunny and cloudy photos, therefore it is not included.
+
+the first one, Sky. the sky is the most important cue for weather labeling. firstly, the sky region is detected in a pixel-wise manner. this paper collect 20 thousand sky and non-sky patches, and extract a 131-D feature which contains the SIFT descriptor and mean HSV color. then random forest classifier is leanrd on the two patch classes.
+
+the second one, Shadow. Hard shadow boundaries present another useful cue as they are often found in outdoor photos shot in sunny days.Unlike detecting sky in an image, shadow detection is still a challenging problem. they apply the shadow detection tool to rank the resulting shadow boundary confidence scores and take the 10th highest score.
+
+the third one, Reflection. Strong sunlight reflected from shiny objects is another powerful cue. they apply image matting at the detected white pixels, then compute the alpha matte distributions to construct this feature. 
+
+the fourth one, Contrast. they collect all saturation percentile ratios to build this feature.
+
+the last one, Haze. Cloudy weather may come with haze. haze priors have been well studied in computer vision, the dark channel prior is effective.
+
+
+
+
+
+
+
